@@ -2,17 +2,19 @@
 
 Небольшое настольное приложение на Java Swing: слева разделы, справа документы выбранной папки. Можно переключить вид кабинета (дерево или панели), плотность интерфейса и тему. Настройки пишутся в локальный `user-settings.json`.
 
-Это **оригинальный учебный код для портфолио**, написанный с нуля под это задание. Он не основан на внутренних продуктах, формах и репозиториях работодателя.
-
 ## Скриншоты
 
-Снимки окна лежат в [`screenshots/`](screenshots/). Сейчас в репозитории только место под них.
+Режим дерева:
 
-- `screenshots/screen-1.png` — режим дерева и таблица документов
-- `screenshots/screen-2.png` — режим панелей, hover на разделе
-- `screenshots/screen-3.png` — свободная плотность и тема «Мягкий серый»
+![Режим дерева](screenshots/screenshot1.png)
 
-Добавьте `screen-1.png` (и при желании остальные) после запуска.
+Режим панелей:
+
+![Режим панелей](screenshots/screenshot2.png)
+
+Свободная плотность и тема «Мягкий серый»:
+
+![Плотность и тема](screenshots/screenshot3.png)
 
 ## Требования
 
@@ -33,24 +35,22 @@ mvn -q compile exec:java
 
 При первом запуске открывается режим **Дерево**, плотность **Обычная**, тема **Светлая**. Выбрана папка «Входящие». Положение разделителя по умолчанию — 280 px.
 
-## Что посмотреть за полминуты
+## Возможности
 
-1. Клик по папке слева меняет таблицу справа. В дереве есть один уровень вложенности (например, «Непрочитанные» внутри «Входящие»).
-2. Меню **Вид → Режим кабинета → Панели** (или **Настройки**) заменяет дерево плоским списком. Рамка у левой карточки пропадает. Наведение подсвечивает пункт серым скруглённым фоном.
-3. **Вид → Плотность** заметно меняет шрифт, высоту строк таблицы и высоту пунктов слева. Окно перезапускать не нужно.
-4. **Вид → Тема → Мягкий серый** меняет фон окна, карточки и hover.
-5. Закройте приложение и запустите снова: режим, плотность, тема и ширина левой колонки читаются из `user-settings.json` в рабочей директории. Файл не коммитится.
+- клик по папке слева обновляет таблицу справа; в дереве есть один уровень вложенности
+- меню **Вид** или диалог **Настройки**: режим кабинета (`Дерево` / `Панели`), плотность, тема
+- в режиме панелей — плоский список со скруглённым hover, без рамки у левой карточки
+- плотность меняет шрифт и высоту строк без перезапуска окна
+- режим, плотность, тема и ширина разделителя сохраняются в `user-settings.json` (файл в `.gitignore`)
+- **Обновить** / F5 перечитывает демонстрационные данные
 
-Кнопка **Обновить** и клавиша F5 заново показывают тот же демонстрационный набор.
+## Стек и приёмы
 
-## Что демонстрирует
-
-- оболочка desktop-приложения на Swing: меню, split, таблица, диалог
-- взаимозаменяемый UI через интерфейс `Cabinet` (`TreeCabinet` и `PanelCabinet`)
-- собственная отрисовка: скруглённые карточки, hover без 3D-рамок
-- централизованные плотность и палитра (`UiStyle`, `UiDensity`, `ColorTheme`)
-- локальные настройки в JSON и аккуратное восстановление после перезапуска
-- сборка Maven, Java 17, работа с UI только на EDT
+- Swing: меню, split, таблица, диалог
+- интерфейс `Cabinet` с реализациями `TreeCabinet` и `PanelCabinet`
+- кастомная отрисовка: `CardPanel`, `RoundedHoverLabel`
+- плотность и палитра через `UiStyle` / `UiDensity` / `ColorTheme`
+- локальный JSON настроек, UI только на EDT, Maven + Java 17
 
 ## Архитектура
 
@@ -74,4 +74,4 @@ mvn -q compile exec:java
 
 ## English summary
 
-Desktop Cabinet Demo is a small original Java 17 / Swing portfolio app. A split window shows folders on the left and a document table on the right. The left side can be swapped between a tree and a flat hoverable panel list without rebuilding the table. UI density (compact, normal, comfortable) and two color themes are applied through one style object and saved, with the splitter position, to a local `user-settings.json`. There is no server, database, or Spring. Run it with `mvn -q compile exec:java`. See `docs/ARCHITECTURE.md` for the cabinet interface, rounded cards, and density model.
+Desktop Cabinet Demo is a small Java 17 / Swing desktop app. A split window shows folders on the left and a document table on the right. The left side can be swapped between a tree and a flat hoverable panel list without rebuilding the table. UI density (compact, normal, comfortable) and two color themes are applied through one style object and saved, with the splitter position, to a local `user-settings.json`. There is no server, database, or Spring. Run it with `mvn -q compile exec:java`. See `docs/ARCHITECTURE.md` for the cabinet interface, rounded cards, and density model.

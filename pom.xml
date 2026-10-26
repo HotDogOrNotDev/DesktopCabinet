@@ -7,7 +7,7 @@
   <artifactId>desktop-cabinet-demo</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <name>Desktop Cabinet Demo</name>
-  <description>Портфолио-демо рабочего кабинета на Swing: дерево и панели, плотность интерфейса, тема.</description>
+  <description>Рабочий кабинет на Swing: дерево и панели, плотность интерфейса, тема.</description>
   <properties>
     <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
